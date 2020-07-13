@@ -1,6 +1,8 @@
-player = document.querySelector("#player");
+"use strict"
 
-lifes = 3;
+let player = document.querySelector("#player");
+
+let lifes = 3;
 
 document.addEventListener('keydown', function(event) {
 
@@ -19,13 +21,35 @@ document.addEventListener('keydown', function(event) {
 		
 		case 32:
 			createBullet();
+			shotSound()
 			break;
 
 	}
 });
 
 
+function shotSound(){
+	let s = document.getElementById('shot').play();
+	s.className ="shot"
+	s.playbackRate = 9.0
+	document.body.appendChild(s);
+}
 
+function planeSound() {
+	let planeS = document.getElementById('plane').play();
+	planeS.className ="plane"
+	planeS.playbackRate = 2.0
+	document.body.appendChild(planeS);	
+}
+
+function boom() {
+	let boomE =document.getElementById('boom').play();
+	boomE.className = "boom"
+	s.playbackRate = 8.0
+	ratechange = 5.0
+	document.body.appendChild(boomE);
+
+}
 function createBullet() {
 	let bullet = document.createElement("div");
 	bullet.className = "bullet";
@@ -34,6 +58,8 @@ function createBullet() {
 	bulletMove(bullet)
 }
 createEnemy();
+
+
 
 
 
@@ -60,6 +86,7 @@ function isShot(bullet, timer) {
 	let bottomB = bullet.offsetTop + bullet.offsetHeight;
 
 	let enemy = document.querySelector(".enemy");
+	
 	if(enemy != null) {
 		
 
@@ -69,7 +96,7 @@ function isShot(bullet, timer) {
 
 		let leftB = bullet.offsetLeft;
 		let leftE = enemy.offsetLeft;
-
+        
 		
 		if(topB >= topE && topB <= bottomE && leftB >= leftE) {
 			enemy.className = 'boom';
@@ -80,7 +107,9 @@ function isShot(bullet, timer) {
 				enemy.remove();
 				createEnemy();
 				bullet.remove();
+				boom();
 				clearInterval(timer);
+				
 			}, 500)
 		}
 	}	
@@ -101,6 +130,7 @@ function enemy_death() {
 		setTimeout(function() {
 			enemy.remove();
 			createEnemy();
+			boom();
 		}, 500);
 		die();
 		score++
@@ -113,9 +143,7 @@ function createEnemy() {
 	let enemy = document.createElement("div");
 	enemy.className = "enemy";
 	enemy.style.top = random(50, document.body.offsetHeight - 100) + "px";
-	
 	document.body.appendChild(enemy);
-
 	let timerId = setInterval(function() {
 
 		enemy.style.left = (enemy.offsetLeft - 20) + "px";
@@ -125,9 +153,12 @@ function createEnemy() {
 			createEnemy();
 			die();
 		}
-
+        if(createEnemy) {
+			planeSound();
+		}
 		enemy_death();
 	}, 100);
+	
 	enemy.dataset.timer = timerId;
 }
 
@@ -154,7 +185,7 @@ function endGame() {
 
 function random(min, max) {
   
-  let rand = min + Math.random() * (max - min);
+  let rand = min + Math.random() * (max+1- min);
   return Math.floor(rand);
 }
 

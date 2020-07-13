@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
+	
 <head>
+
 	<title>Web-shooter</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+	<audio src="audio/bg.mp3">
+		<audio id="shot" src="audio/shot.mp3"></audio>
+		<audio id="boom" src="audio/boom.mp3"></audio>
+		<audio id="plane" src="audio/plane.mp3"></audio>
+		
+		</audio>
 	<div id="lifes">
 		<span></span>
 		<span></span>
 		<span></span>
 	</div>
 	<div id="player" class="skin"></div>
+	
 
 <script type="text/javascript" src="script.js"></script>
+<script src="audio/audiojs/audio.min.js"></script>
+<script>
+	audiojs.events.ready(function() {
+	  let as = audiojs.createAll();
+	});
+  </script>
 </body>
 </html>

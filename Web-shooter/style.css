@@ -9,7 +9,6 @@ body {
 	background-size: cover;
 	position: relative;
 }
-
 #player {
 	height: 200px;
 	position: absolute;
@@ -36,13 +35,13 @@ body {
 	height: 100px;
 	background: url("img/enemy1.gif") no-repeat;
 }
-.enemy2 {
+.enemyII {
 	position: absolute;
 	top: calc(50% - 85px);
 	right: 20px;
-	width: 313px;
-	height: 500px;
-	background: url("img/enemy2.gif") no-repeat;
+	width: 128px;
+	height: 128px;
+	background: url("img/Myface.png") no-repeat;
 }
 
 .bullet {
@@ -59,10 +58,10 @@ body {
 }
 
 .boom {
-	background: url(img/boom.gif);
+	background: url(img/boom2.gif);
 	position: absolute;
-	width: 128px;
-	height: 128px;
+	width: 256px;
+	height: 256px;
 }
 
 #lifes {
